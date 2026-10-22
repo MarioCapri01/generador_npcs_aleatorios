@@ -32,7 +32,9 @@ export class Scripts {
     };
     // Si la clasificación estaba marcada (ej: sociales == true), sumamos un bonificador a dichos parámetros.
     atSoc = sociales ? this.sumamosBonificador(atSoc) : atSoc;
-    console.log(atSoc);
+    atFis = fisicos ? this.sumamosBonificador(atFis) : atFis;
+    atMen = mentales ? this.sumamosBonificador(atMen) : atMen;
+    console.log({"atSoc": atSoc,"atFis": atFis,"atMen": atMen});
     
   }
   valorAleatorio(): number{
