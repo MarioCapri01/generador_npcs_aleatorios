@@ -21,35 +21,30 @@ export class Scripts {
     let atSoc : {[key: string]: number} = {carisma: this.valorAleatorio(),
       apariencia: this.valorAleatorio(),
       manupulacion: this.valorAleatorio(),
-    };
-    interface AtMentales {
-      astucia: number, inteligencia: number, percepcion: number
-    };
-    let atMen : AtMentales = {astucia: this.valorAleatorio(),
+    };// <- TODO: OPTIMIZAR ASIGNACION DE VALORES ALEATORIOS, LLAMAR MENOS VECES A LA FUNCIÓN
+    let atMen : {[key: string]: number} = {astucia: this.valorAleatorio(),
       inteligencia: this.valorAleatorio(),
       percepcion: this.valorAleatorio(),
     };
-    console.log({"antes: ": atSoc});
-    interface AtFisicos {
-      destreza: number, fuerza: number, resistencia: number
-    };
-    let atFis : AtFisicos = {destreza: this.valorAleatorio(),
+    let atFis : {[key: string]: number} = {destreza: this.valorAleatorio(),
       fuerza: this.valorAleatorio(),
       resistencia: this.valorAleatorio(),
     };
     // Si la clasificación estaba marcada (ej: sociales == true), sumamos un bonificador a dichos parámetros.
-    //type SocialKeys = keyof atSoc;
-    if(sociales){
-      // Almacenamos las Keys del objeto en un array de strings para recorrer todas sus propiedades y sumarle el bonus
-      let propSoc : string[] = Object.keys(atSoc);
-      propSoc.forEach((atributo: string) =>{
-        atSoc[atributo] += 4;
-      })
-    }
+    atSoc = sociales ? this.sumamosBonificador(atSoc) : atSoc;
+    console.log(atSoc);
     
   }
   valorAleatorio(): number{
     // Generamos un valor aleatorio entre 0 y 3
     return Math.round(Math.random() * 3);
+  }
+  sumamosBonificador(viejosStats: {[key: string]: number}): {[key: string]: number}{
+    let nuevosStats : {[key: string]: number} = viejosStats;
+    let propSoc : string[] = Object.keys(nuevosStats);
+    propSoc.forEach((atributo: string) =>{
+      nuevosStats[atributo] += 4;
+    });
+    return nuevosStats;
   }
 }
