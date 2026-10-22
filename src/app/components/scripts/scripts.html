@@ -1,8 +1,11 @@
 <hr/>
 <div class="npcs">
     <h2>Genera un nuevo NPC</h2>
-    <input [(ngModel)]="nuevoNPC" type="text" placeholder="Nombre del NPC"/>
-    <button>Generar</button>
+    <input [(ngModel)]="nuevoNPC" type="text" placeholder="Nombre del NPC"/><br/>
+    Atributos Sociales: <input [(ngModel)]="sociales" type ="checkbox" [defaultChecked]="false"/><br/>
+    Atributos Mentales: <input [(ngModel)]="mentales" type ="checkbox" [defaultChecked]="false"/><br/>
+    Atributos Físicos: <input [(ngModel)]="fisicos" type ="checkbox" [defaultChecked]="false"/><br/>
+    <button (click)="generaNPC(sociales, mentales, fisicos)">Generar</button>
     <h4>{{nuevoNPC}}</h4>
 
 
