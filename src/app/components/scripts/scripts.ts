@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, numberAttribute } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 @Component({
@@ -14,6 +14,8 @@ export class Scripts {
   mentales: boolean = false;
   fisicos: boolean = false;
   otrasHabilidades: object = {};
+  npcGenerado: object = {};
+  npcIterable: any[] = [];
   generaNPC(sociales: boolean, mentales: boolean, fisicos: boolean){
     
     // Generamos valor aleatorio a las características 
@@ -34,19 +36,30 @@ export class Scripts {
     atSoc = sociales ? this.sumamosBonificador(atSoc) : atSoc;
     atFis = fisicos ? this.sumamosBonificador(atFis) : atFis;
     atMen = mentales ? this.sumamosBonificador(atMen) : atMen;
-    console.log({"atSoc": atSoc,"atFis": atFis,"atMen": atMen});
-    
+    this.npcGenerado = {"Atributos_Sociales": atSoc,"Atributos_Fisicos": atFis,"Atributos_Mentales": atMen};
+    this.npcIterable = this.iterarNpc(JSON.stringify(this.npcGenerado));
+    console.log(this.npcIterable);
   }
+  // Generamos un valor aleatorio entre 0 y 3
   valorAleatorio(): number{
-    // Generamos un valor aleatorio entre 0 y 3
     return Math.round(Math.random() * 3);
   }
+  // Recorremos todos los stats del objeto y les sumamos 4
   sumamosBonificador(viejosStats: {[key: string]: number}): {[key: string]: number}{
     let nuevosStats : {[key: string]: number} = viejosStats;
-    let propSoc : string[] = Object.keys(nuevosStats);
-    propSoc.forEach((atributo: string) =>{
+    Object.keys(nuevosStats).forEach((atributo: string) =>{
       nuevosStats[atributo] += 4;
     });
     return nuevosStats;
+  }
+  // {atributo: valor, atributo2: valor2, ...} => [{atributo: valor}, {atributo2: valor2}]
+  iterarNpc(npcString: string): any[]{
+    let npcObjeto = JSON.parse(npcString);
+    let atributosIterados : any[] = [];
+    Object.keys(npcObjeto).forEach((atributo: string) =>{
+      let nuevoObjeto: {[key: string]: number} = {atributo: npcObjeto[atributo]};
+      atributosIterados.push(nuevoObjeto);
+    });
+    return atributosIterados;
   }
 }

@@ -6,7 +6,14 @@
     Atributos Mentales: <input [(ngModel)]="mentales" type ="checkbox" [defaultChecked]="false"/><br/>
     Atributos Físicos: <input [(ngModel)]="fisicos" type ="checkbox" [defaultChecked]="false"/><br/>
     <button (click)="generaNPC(sociales, mentales, fisicos)">Generar</button>
+    <hr/>
     <h4>{{nuevoNPC}}</h4>
-
+    <div>
+        <!--@for (item of npcIterable; track $index) {
+            <li>{{item}}</li>
+        }@empty {
+            <li>No se ha generado ningún NPC</li>
+    }-->
+    </div>
 
 </div>
