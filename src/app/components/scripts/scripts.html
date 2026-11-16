@@ -8,12 +8,24 @@
     <button (click)="generaNPC(sociales, mentales, fisicos)">Generar</button>
     <hr/>
     <h4>{{nuevoNPC}}</h4>
-    <div>
+    <!-- <div>
         @for (item of npcString; track $index) {
             <li>{{ item  }}</li>
         }@empty {
             <li>No se ha generado ningún NPC</li>
     }
-    </div>
+    </div> -->
+    <div>
 
+       @for (item of npcAtributos; track item.categoria; let idx = $index;) {
+            <li>{{item.categoria}}:</li>
+            <div>
+            @for (subItem of item.atributos; track subItem){
+                <ul>{{ subItem }}</ul><br/>
+            }
+            </div>
+        } @empty {
+            <li>No se ha generado ningún NPC</li>
+        }
+    </div>
 </div>

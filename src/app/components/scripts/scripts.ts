@@ -1,21 +1,13 @@
 import { Component, numberAttribute } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-
+import { FormsModule, NgForm } from '@angular/forms';
+import { iterator } from 'rxjs/internal/symbol/iterator';
+import { CommonModule } from '@angular/common';
 @Component({
-  imports: [FormsModule],
+  imports: [FormsModule, CommonModule],
   selector: 'app-scripts',
   styleUrl: './scripts.css',
   templateUrl: './scripts.html'
-})/*
-@Component({
-  imports: [JsonPipe],
-  template: `<div>
-    <p>Without JSON pipe:</p>
-    <pre>{{ object }}</pre>
-    <p>With JSON pipe:</p>
-    <pre>{{ object | json }}</pre>
-  </div>`,
-})*/
+})
 export class Scripts {
   listaNPCs: string[] = [];
   nuevoNPC: string = "";
@@ -24,7 +16,7 @@ export class Scripts {
   fisicos: boolean = false;
   otrasHabilidades: object = {};
   npcGenerado: object = {};
-  npcString: any[] = [];
+  npcAtributos: any[] = [];
   generaNPC(sociales: boolean, mentales: boolean, fisicos: boolean){
     
     // Generamos valor aleatorio a las características 
@@ -46,9 +38,8 @@ export class Scripts {
     atFis = fisicos ? this.sumamosBonificador(atFis) : atFis;
     atMen = mentales ? this.sumamosBonificador(atMen) : atMen;
     this.npcGenerado = {"Atributos_Sociales": atSoc,"Atributos_Fisicos": atFis,"Atributos_Mentales": atMen};
-    this.npcString = this.npcFormatado(JSON.stringify(this.npcGenerado));
-    console.log(this.npcString);
-    //TODO: Investigar JSON pipe para mostrar resultado de json
+    this.npcAtributos = this.npcFormatado(JSON.stringify(this.npcGenerado));
+    console.log(this.npcAtributos);
   }
   // Generamos un valor aleatorio entre 0 y 3
   valorAleatorio(): number{
@@ -63,17 +54,17 @@ export class Scripts {
     return nuevosStats;
   }
   // {atributo: valor, atributo2: valor2, ...} => [{atributo: valor}, {atributo2: valor2}]
-  npcFormatado(npcString: string): string[]{
+  npcFormatado(npcString: string): any[]{//[{[key: string]: any[]}]{
+    
     let npcObjeto = JSON.parse(npcString);
-    let atributosIterados : string[] = [];
+    let atributosIterados : any[] = [];
     Object.keys(npcObjeto).forEach((atributo: string) =>{
-      let nuevoObjeto: string = atributo.concat(": \n");
-      Object.keys(npcObjeto[atributo]).forEach((subAtributo: string) => {
-        nuevoObjeto = nuevoObjeto.concat("\t - ").concat(subAtributo).concat(": ").concat(npcObjeto[atributo][subAtributo]).concat("\n");
+      let objetoLv1: {[key: string]: any} = {"categoria": atributo, "atributos": []};
+      Object.keys(npcObjeto[atributo]).forEach((subAtributo: string) =>{
+        objetoLv1["atributos"].push(subAtributo.concat(": ").concat(npcObjeto[atributo][subAtributo]));
       });
-      atributosIterados.push(nuevoObjeto);
+      atributosIterados.push(objetoLv1);
     });
-    console.log(atributosIterados);
     return atributosIterados;
   }
 }
