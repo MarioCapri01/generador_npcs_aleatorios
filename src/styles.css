@@ -1,1 +1,31 @@
 /* You can add global styles to this file, and also import other style files */
+h1 {
+    text-align: center;
+    color: #33FE33;
+    font-family: "Lucida Console", "Courier New", monospace;
+}
+h2 {
+    color: #33FE33;
+    font-family: "Lucida Console", "Courier New", monospace;
+    text-align: center;
+}
+h3 {
+    color: #33FE33;
+    font-family: "Lucida Console", "Courier New", monospace;
+    text-align: center;
+}
+body {
+    color: #33FE33;
+    font-family: "Lucida Console", "Courier New", monospace;
+      font: 1.25em/1.5em monospace;
+    background: #0a0a0a;
+        background-color: rgb(10, 10, 10);
+        background-position-x: 0%;
+        background-position-y: 0%;
+        background-repeat: repeat;
+        background-attachment: scroll;
+        background-image: none;
+        background-size: auto;
+        background-origin: padding-box;
+        background-clip: border-box;
+}

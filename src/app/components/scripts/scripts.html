@@ -1,27 +1,24 @@
 <hr/>
 <div class="npcs">
-    <h2>Genera un nuevo NPC</h2>
-    <input [(ngModel)]="nuevoNPC" type="text" placeholder="Nombre del NPC"/><br/>
-    Atributos Sociales: <input [(ngModel)]="sociales" type ="checkbox" [defaultChecked]="false"/><br/>
-    Atributos Mentales: <input [(ngModel)]="mentales" type ="checkbox" [defaultChecked]="false"/><br/>
-    Atributos Físicos: <input [(ngModel)]="fisicos" type ="checkbox" [defaultChecked]="false"/><br/>
-    <button (click)="generaNPC(sociales, mentales, fisicos)">Generar</button>
+    <div class="menu">
+        <h2>Genera un nuevo NPC</h2>
+            <input [(ngModel)]="nuevoNPC" type="text" placeholder="Nombre del NPC"/><br/>
+                <label class="contenedor">Atributos Sociales: 
+                    <input [(ngModel)]="sociales" type ="checkbox" [defaultChecked]="false"/>
+                    <span class="custom-checkbox"></span>
+                </label>
+                Atributos Mentales: <input [(ngModel)]="mentales" type ="checkbox" [defaultChecked]="false"/><br/>
+                Atributos Físicos: <input [(ngModel)]="fisicos" type ="checkbox" [defaultChecked]="false"/><br/>
+            <button (click)="generaNPC(sociales, mentales, fisicos)">Generar</button>
+    </div>
     <hr/>
     <h4>{{nuevoNPC}}</h4>
-    <!-- <div>
-        @for (item of npcString; track $index) {
-            <li>{{ item  }}</li>
-        }@empty {
-            <li>No se ha generado ningún NPC</li>
-    }
-    </div> -->
-    <div>
-
+    <div class="display">
        @for (item of npcAtributos; track item.categoria; let idx = $index;) {
             <li>{{item.categoria}}:</li>
             <div>
             @for (subItem of item.atributos; track subItem){
-                <ul>{{ subItem }}</ul><br/>
+                <ul>{{ subItem }}</ul>
             }
             </div>
         } @empty {

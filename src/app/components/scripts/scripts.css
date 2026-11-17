@@ -1,0 +1,56 @@
+.menu {
+    text-align: center;
+    color: #33FE33;
+    size: 40em;
+    font-size: 2em;
+}
+button {
+    background-color: black;
+    color: #33FE33;
+    border: 1px solid #33FE33;
+    font-size: 1em;
+}
+input {
+    background-color: black;
+    color: #33FE33;
+    border: 1px solid #33FE33;
+    font-size: 1em;
+    text-align: center;
+    
+}
+.contenedor{
+    display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.contenedor input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+.custom-checkbox{
+    background-color: black;
+    border: 1px solid #33FE33;
+
+}
+/* On mouse-over, add a grey background color */
+.contenedor:hover input ~ .custom-checkbox {
+  background-color: rgb(66, 66, 66);
+}
+
+/* When the checkbox is checked, add a blue background */
+.contenedor input:checked ~ .custom-checkbox {
+  background-color: #33FE33;;
+}
+.display {
+    font-size: 2em;
+    margin-left: 10%;
+}
