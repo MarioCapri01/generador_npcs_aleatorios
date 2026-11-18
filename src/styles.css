@@ -1,19 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
-h1 {
-    text-align: center;
-    color: #33FE33;
-    font-family: "Lucida Console", "Courier New", monospace;
-}
-h2 {
-    color: #33FE33;
-    font-family: "Lucida Console", "Courier New", monospace;
-    text-align: center;
-}
-h3 {
-    color: #33FE33;
-    font-family: "Lucida Console", "Courier New", monospace;
-    text-align: center;
-}
+
+/*TODO: Averigua como conseguir efecto como de pantalla retro (ver TPB.run)*/
 body {
     color: #33FE33;
     font-family: "Lucida Console", "Courier New", monospace;

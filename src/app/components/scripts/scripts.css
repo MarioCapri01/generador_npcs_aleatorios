@@ -20,7 +20,8 @@ input {
 input:hover {
   border: 1px solid #29ca29;
 }
-input:focus{
+/*TODO: Cuando seleccionas el input de texto, no debería ponerse en azul*/
+input::highlight{
   
   border: 1px solid #29ca29;
 }

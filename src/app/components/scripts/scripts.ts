@@ -17,27 +17,19 @@ export class Scripts {
   otrasHabilidades: object = {};
   npcGenerado: object = {};
   npcAtributos: any[] = [];
+  valorMaximo: number = 3;
+  valorBonificador: number = 2;
   generaNPC(sociales: boolean, mentales: boolean, fisicos: boolean){
     
     // Generamos valor aleatorio a las características 
     // Sintaxis -> let objeto : {[key: tipoClave1 | tipoClave2 ...]: tipoValor1 | tipoValor2 ...}
-    let atSoc : {[key: string]: number} = {carisma: this.valorAleatorio(),
-      apariencia: this.valorAleatorio(),
-      manupulacion: this.valorAleatorio(),
-    };// <- TODO: OPTIMIZAR ASIGNACION DE VALORES ALEATORIOS, LLAMAR MENOS VECES A LA FUNCIÓN
-    let atMen : {[key: string]: number} = {astucia: this.valorAleatorio(),
-      inteligencia: this.valorAleatorio(),
-      percepcion: this.valorAleatorio(),
-    };
-    let atFis : {[key: string]: number} = {destreza: this.valorAleatorio(),
-      fuerza: this.valorAleatorio(),
-      resistencia: this.valorAleatorio(),
-    };
-    // Si la clasificación estaba marcada (ej: sociales == true), sumamos un bonificador a dichos parámetros.
-    atSoc = sociales ? this.sumamosBonificador(atSoc) : atSoc;
-    atFis = fisicos ? this.sumamosBonificador(atFis) : atFis;
-    atMen = mentales ? this.sumamosBonificador(atMen) : atMen;
-    this.npcGenerado = {"Atributos_Sociales": atSoc,"Atributos_Fisicos": atFis,"Atributos_Mentales": atMen};
+    let atributosSociales : string[] = ["Carisma","Apariencia","Manipulacion"];
+    let atributosMentales : string[] = ["Astucia","Inteligencia","Percepcion"];
+    let atributosFisicos : string[] = ["Destreza","Fuerza","Resistencia"];
+    let atSoc : {[key: string]: number} = this.generatributosAleatorios(atributosSociales, this.valorMaximo, sociales);
+    let atMen : {[key: string]: number} = this.generatributosAleatorios(atributosMentales, this.valorMaximo, mentales);
+    let atFis : {[key: string]: number} = this.generatributosAleatorios(atributosFisicos, this.valorMaximo, fisicos);
+    this.npcGenerado = {"Atributos_Sociales": atSoc,"Atributos_Mentales": atMen,"Atributos_Fisicos": atFis};
     this.npcAtributos = this.npcFormatado(JSON.stringify(this.npcGenerado));
     console.log(this.npcAtributos);
   }
@@ -45,15 +37,20 @@ export class Scripts {
   valorAleatorio(): number{
     return Math.round(Math.random() * 3);
   }
-  // Recorremos todos los stats del objeto y les sumamos 4
-  sumamosBonificador(viejosStats: {[key: string]: number}): {[key: string]: number}{
-    let nuevosStats : {[key: string]: number} = viejosStats;
-    Object.keys(nuevosStats).forEach((atributo: string) =>{
-      nuevosStats[atributo] += 4;
+  // Genera valores aleatorios.
+  //  atributos: lista de características del personaje.
+  //  valorMaximo: límite del valor generado.
+  //  bonificador: si está activo, sumanos un valor predeterminado..
+  generatributosAleatorios(atributos: string[], valorMaximo : number, bonificador : boolean): {[key: string]: number}{
+    let nuevoObjeto : {[key: string]: number} = {};
+    atributos.forEach((atributo: string) =>{
+      let valorAleatorio : number = Math.round(Math.random() * valorMaximo);
+      valorAleatorio = valorAleatorio === 0 ? 1 : valorAleatorio;
+      nuevoObjeto[atributo] = bonificador ? valorAleatorio + this.valorBonificador : valorAleatorio;
     });
-    return nuevosStats;
+    return nuevoObjeto;
   }
-  // {atributo: valor, atributo2: valor2, ...} => [{atributo: valor}, {atributo2: valor2}]
+  // {atributo: valor, atributo2: valor2, ...} => [{categoria: Nombre_Categoria, atributos: ["atributo: valor", ...}, ...]
   npcFormatado(npcString: string): any[]{//[{[key: string]: any[]}]{
     
     let npcObjeto = JSON.parse(npcString);
