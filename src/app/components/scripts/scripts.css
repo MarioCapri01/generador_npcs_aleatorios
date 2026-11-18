@@ -15,14 +15,18 @@ input {
     color: #33FE33;
     border: 1px solid #33FE33;
     font-size: 1em;
-    text-align: center;
-    
+    text-align: center; 
+}
+input:hover {
+  border: 1px solid #29ca29;
+}
+input:focus{
+  
+  border: 1px solid #29ca29;
 }
 .contenedor{
-    display: block;
+  display: block;
   position: relative;
-  padding-left: 35px;
-  margin-bottom: 12px;
   cursor: pointer;
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -33,22 +37,23 @@ input {
   position: absolute;
   opacity: 0;
   cursor: pointer;
-  height: 0;
-  width: 0;
 }
 .custom-checkbox{
     background-color: black;
     border: 1px solid #33FE33;
-
+    height: 20px;
+    width: 20px;
+    position: absolute;
+    opacity: 1;
 }
-/* On mouse-over, add a grey background color */
+/* On mouse-over, add a grey background color 
 .contenedor:hover input ~ .custom-checkbox {
   background-color: rgb(66, 66, 66);
-}
+}*/
 
 /* When the checkbox is checked, add a blue background */
 .contenedor input:checked ~ .custom-checkbox {
-  background-color: #33FE33;;
+  background-color: #33FE33;
 }
 .display {
     font-size: 2em;

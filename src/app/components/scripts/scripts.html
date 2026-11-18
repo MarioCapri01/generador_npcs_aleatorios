@@ -3,12 +3,18 @@
     <div class="menu">
         <h2>Genera un nuevo NPC</h2>
             <input [(ngModel)]="nuevoNPC" type="text" placeholder="Nombre del NPC"/><br/>
-                <label class="contenedor">Atributos Sociales: 
-                    <input [(ngModel)]="sociales" type ="checkbox" [defaultChecked]="false"/>
-                    <span class="custom-checkbox"></span>
-                </label>
-                Atributos Mentales: <input [(ngModel)]="mentales" type ="checkbox" [defaultChecked]="false"/><br/>
-                Atributos Físicos: <input [(ngModel)]="fisicos" type ="checkbox" [defaultChecked]="false"/><br/>
+            <label class="contenedor">Atributos Sociales: 
+                <input [(ngModel)]="sociales" type ="checkbox" [defaultChecked]="false"/>
+                <span class="custom-checkbox"></span>
+            </label>
+            <label class="contenedor">Atributos Mentales: 
+                <input [(ngModel)]="mentales" type ="checkbox" [defaultChecked]="false"/>
+                <span class="custom-checkbox"></span>
+            </label>
+            <label class="contenedor">Atributos Físicos: 
+                <input [(ngModel)]="fisicos" type ="checkbox" [defaultChecked]="false"/>
+                <span class="custom-checkbox"></span>
+            </label>
             <button (click)="generaNPC(sociales, mentales, fisicos)">Generar</button>
     </div>
     <hr/>
