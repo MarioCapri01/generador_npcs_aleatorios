@@ -15,6 +15,8 @@
                 <input [(ngModel)]="fisicos" type ="checkbox" [defaultChecked]="false"/>
                 <span class="custom-checkbox"></span>
             </label>
+            <input [(ngModel)]="habilidad" type ="text"/>
+            <button (click)="nuevaHabilidad(habilidad)">Añadir</button><br/>
             <button (click)="generaNPC(sociales, mentales, fisicos)">Generar</button>
     </div>
     <hr/>

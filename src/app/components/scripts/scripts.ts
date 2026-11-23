@@ -15,10 +15,21 @@ export class Scripts {
   mentales: boolean = false;
   fisicos: boolean = false;
   otrasHabilidades: object = {};
-  npcGenerado: object = {};
+  npcGenerado: {[k: string]: any} = {};
   npcAtributos: any[] = [];
   valorMaximo: number = 3;
   valorBonificador: number = 2;
+  habilidad: string = "";
+  habilidadesAdicionales: string[] = [];
+  nuevasHabilidades: boolean = false;
+
+  // Nueva habilidad a la lista
+  nuevaHabilidad(habilidad: string){
+    this.nuevasHabilidades = true;
+    this.habilidadesAdicionales.push(habilidad);
+    this.habilidad = '';
+  }
+  // Genera NPCs con las características indicadas
   generaNPC(sociales: boolean, mentales: boolean, fisicos: boolean){
     
     // Generamos valor aleatorio a las características 
@@ -30,6 +41,7 @@ export class Scripts {
     let atMen : {[key: string]: number} = this.generatributosAleatorios(atributosMentales, this.valorMaximo, mentales);
     let atFis : {[key: string]: number} = this.generatributosAleatorios(atributosFisicos, this.valorMaximo, fisicos);
     this.npcGenerado = {"Atributos_Sociales": atSoc,"Atributos_Mentales": atMen,"Atributos_Fisicos": atFis};
+    if(this.nuevasHabilidades) this.npcGenerado['Habilidades_Adicionales'] = this.generatributosAleatorios(this.habilidadesAdicionales, this.valorMaximo, false);
     this.npcAtributos = this.npcFormatado(JSON.stringify(this.npcGenerado));
     console.log(this.npcAtributos);
   }
